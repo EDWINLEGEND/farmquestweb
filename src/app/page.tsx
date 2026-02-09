@@ -685,77 +685,93 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Footer CTA */}
-        <div className="py-12 px-4 md:px-8 bg-white pb-0">
-          <div className="max-w-7xl mx-auto relative rounded-t-[3rem] bg-[#FAFAFA] overflow-hidden">
-            <div className="absolute inset-x-0 bottom-0 top-1/2 bg-white/50 backdrop-blur-sm z-0"></div>
+        {/* Footer with Background Image */}
+        <div className="relative w-full min-h-screen flex flex-col justify-end bg-gray-900 overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/footer_bg.png"
+              alt="Footer Background"
+              fill
+              className="object-cover opacity-90"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60"></div>
+          </div>
 
-            <div className="relative z-10 pt-24 px-8 pb-32 text-center">
-              <h2 className="text-4xl md:text-6xl font-medium text-[#1a1a1a] max-w-4xl mx-auto leading-tight mb-4">
+          {/* Main Content Wrapper */}
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 pt-32 pb-8 flex flex-col h-full justify-between">
+
+            {/* Top CTA Section */}
+            <div className="text-center mb-16 md:mb-24">
+              <h2 className="text-4xl md:text-6xl font-medium text-white max-w-4xl mx-auto leading-tight mb-6 drop-shadow-lg">
                 Make farming smarter,
                 <br />
                 <span className="font-serif italic">stronger, and simpler</span>
               </h2>
-              <p className="text-gray-600 max-w-xl mx-auto mb-10">
+              <p className="text-white/90 text-lg md:text-xl max-w-xl mx-auto mb-10 drop-shadow-md font-light">
                 Straightforward answers to help you make confident decisions for your farm.
               </p>
-              <button className="bg-[#1F4529] text-white px-8 py-4 rounded-full font-medium hover:bg-[#15301c] transition-colors shadow-lg shadow-[#1F4529]/20">
+              <button className="bg-[#1F4529] text-white px-8 py-4 rounded-full font-medium hover:bg-[#15301c] transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(31,69,41,0.5)] border border-white/10">
                 Contact Us
               </button>
             </div>
 
-            {/* Footer Links - Glassmorphism Card */}
-            <div className="relative z-20 mx-4 md:mx-8 mb-8 bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-gray-100">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div className="col-span-1">
-                  <div className="flex items-center gap-2 mb-6">
-                    <Logo />
+            {/* Bottom White Card Section */}
+            {/* Glass Wrapper (Translucent Border) */}
+            <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-[3.5rem] p-3 md:p-4 shadow-2xl">
+              <div className="bg-white rounded-[3rem] p-8 md:p-12 w-full h-full">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+                  <div className="col-span-1">
+                    <div className="flex items-center gap-2 mb-6">
+                      <Logo />
+                    </div>
+                    <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+                      FarmQuest empowers farmers with smart tools for better yields and sustainable growth.
+                    </p>
+                    <div className="flex gap-4">
+                      {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
+                        <a key={i} href="#" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#D2F04E] hover:text-black transition-colors">
+                          <Icon className="w-4 h-4" />
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                  <p className="text-gray-500 text-sm mb-6 leading-relaxed">
-                    FarmQuest empowers farmers with smart tools for better yields and sustainable growth.
-                  </p>
-                  <div className="flex gap-4">
-                    {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
-                      <a key={i} href="#" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#D2F04E] hover:text-black transition-colors">
-                        <Icon className="w-4 h-4" />
-                      </a>
-                    ))}
+
+                  <div>
+                    <h4 className="font-bold text-[#1a1a1a] mb-6">Quick Links</h4>
+                    <ul className="space-y-4 text-gray-500 text-sm">
+                      {['Home', 'About', 'Services', 'Contact'].map(item => (
+                        <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-[#1a1a1a] mb-6">Services</h4>
+                    <ul className="space-y-4 text-gray-500 text-sm">
+                      {['Smart Crop Monitoring', 'Precision Irrigation Systems', 'Soil & Weather Analytics', 'Maintenance & Support'].map(item => (
+                        <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-[#1a1a1a] mb-6">Company</h4>
+                    <ul className="space-y-4 text-gray-500 text-sm">
+                      {['Contact Us', 'Emergency Help', 'FAQ', 'Privacy Policy'].map(item => (
+                        <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
-                <div>
-                  <h4 className="font-bold text-[#1a1a1a] mb-6">Quick Links</h4>
-                  <ul className="space-y-4 text-gray-500 text-sm">
-                    {['Home', 'About', 'Services', 'Contact'].map(item => (
-                      <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="font-bold text-[#1a1a1a] mb-6">Services</h4>
-                  <ul className="space-y-4 text-gray-500 text-sm">
-                    {['Smart Crop Monitoring', 'Precision Irrigation Systems', 'Soil & Weather Analytics', 'Maintenance & Support'].map(item => (
-                      <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="font-bold text-[#1a1a1a] mb-6">Company</h4>
-                  <ul className="space-y-4 text-gray-500 text-sm">
-                    {['Contact Us', 'Emergency Help', 'FAQ', 'Privacy Policy'].map(item => (
-                      <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="border-t border-gray-100 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-                <p>© 2026 FarmQuest. All rights reserved.</p>
-                <div className="flex gap-6 mt-4 md:mt-0">
-                  <a href="#" className="hover:text-gray-600">Terms of Service</a>
-                  <a href="#" className="hover:text-gray-600">Privacy Policy</a>
+                <div className="border-t border-gray-100 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                  <p>© 2026 FarmQuest. All rights reserved.</p>
+                  <div className="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" className="hover:text-gray-600">Terms of Service</a>
+                    <a href="#" className="hover:text-gray-600">Privacy Policy</a>
+                  </div>
                 </div>
               </div>
             </div>
