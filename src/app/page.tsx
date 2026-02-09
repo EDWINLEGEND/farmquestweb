@@ -219,16 +219,16 @@ export default function Home() {
             </div>
 
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.3 }}
               className="text-3xl md:text-5xl font-medium text-[#1a1a1a] leading-tight mt-8"
             >
               Our platform is built to support farmers, agribusinesses, and agricultural innovators
               <span className="text-gray-400"> by delivering </span>
-              <span className="inline-flex items-center align-middle mx-2">
-                <div className="w-16 h-10 bg-gray-200 rounded-full overflow-hidden relative">
+              <span className="inline-flex items-center align-middle mx-2 translate-y-1">
+                <div className="w-20 h-10 bg-gray-200 rounded-full overflow-hidden relative shadow-sm">
                   <Image src="/images/plant-1.png" alt="Nature" fill className="object-cover" />
                 </div>
               </span>
@@ -330,7 +330,7 @@ export default function Home() {
               <div className="group cursor-pointer mt-12 md:mt-0">
                 <div className="relative h-[500px] rounded-[2rem] overflow-hidden mb-6">
                   <div className="absolute inset-0 bg-gray-200 group-hover:scale-105 transition-transform duration-700">
-                    <Image src="/images/globe.png" alt="Sustainable" fill className="object-cover" />
+                    <Image src="/images/fq1.png" alt="Sustainable" fill className="object-cover" />
                   </div>
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
                 </div>
