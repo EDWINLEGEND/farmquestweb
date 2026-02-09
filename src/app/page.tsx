@@ -4,7 +4,7 @@ import Logo from '@/components/Logo';
 import HeroImage from '@/components/HeroImage';
 import GetStartedButton from '@/components/GetStartedButton';
 import AccountLink from '@/components/AccountLink';
-import { CheckCircle, Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award, Zap, ArrowRight, ChevronUp, MessageSquare } from 'lucide-react';
+import { CheckCircle, Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award, Zap, ArrowRight, ChevronUp, MessageSquare, ArrowDown, Star, Play, Plus, Minus, Facebook, Instagram, Linkedin, Twitter, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
@@ -18,7 +18,9 @@ const BackgroundGrid = dynamic(
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
-  
+  const [activeSolution, setActiveSolution] = useState<number | null>(1);
+  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -31,14 +33,14 @@ export default function Home() {
       <div className="md:hidden">
         <div className="relative h-screen flex flex-col">
           <div className="absolute inset-0 bg-white z-0"></div>
-          
+
           <div className="z-10 p-6 flex justify-between items-center">
             <Logo />
             <button className="text-[#0F6435] font-medium">Skip</button>
           </div>
-          
+
           <div className="flex-1 flex flex-col justify-center items-center px-6 z-10">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -46,9 +48,9 @@ export default function Home() {
             >
               <HeroImage />
             </motion.div>
-            
-            
-            
+
+
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -62,7 +64,7 @@ export default function Home() {
                 Turn Your Thumb Green, No Experience Needed!
               </p>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -75,389 +77,270 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       {/* Desktop View */}
       <div className="hidden md:block">
         {/* Navigation Bar */}
-        <motion.div 
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-[#77AD3F]/20"
-        >
-          <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-            <Logo />
-            <div className="flex items-center gap-8">
-              <Link href="/about" className="text-gray-700 hover:text-[#0F6435] transition-colors font-medium">About</Link>
-              <Link href="/features" className="text-gray-700 hover:text-[#0F6435] transition-colors font-medium">Features</Link>
-              <Link href="/pricing" className="text-gray-700 hover:text-[#0F6435] transition-colors font-medium">Pricing</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-[#0F6435] transition-colors font-medium">Contact</Link>
-              <Link 
-                href="/login" 
-                className="bg-gradient-to-br from-[#77AD3F] to-[#0F6435] text-white px-5 py-2 rounded-full font-medium transition-all hover:shadow-lg"
-              >
-                Log in
-              </Link>
+        {/* Navigation Bar & Hero Section Wrapped */}
+        <div className="p-6 h-screen min-h-[800px] flex flex-col relative bg-gray-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="flex-1 w-full relative rounded-[2.5rem] overflow-hidden shadow-2xl isolate"
+          >
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 bg-[url('/images/background.png')] bg-cover bg-center z-0">
+              <div className="absolute inset-0 bg-black/10 backdrop-brightness-95"></div>
+              {/* Subtle gradient overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/30"></div>
             </div>
-          </div>
-        </motion.div>
-        
-        {/* Hero Section */}
-        <div className="max-w-7xl mx-auto px-8 pt-24 pb-16">
-          <div className="grid grid-cols-12 gap-12 items-center">
-            {/* Left Content Section */}
-            <motion.div 
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.7 }}
-              className="col-span-6 flex flex-col items-start"
-            >
-              <div className="inline-block px-4 py-1 bg-[#77AD3F]/20 text-[#0F6435] rounded-full text-sm font-medium mb-6">
-                Sustainable Farming
+
+            {/* Floating Navbar */}
+            <nav className="relative z-50 px-8 py-6 flex justify-between items-center">
+              <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg brightness-0 invert filter">
+                <Logo />
               </div>
-              
-              <h1 className="text-6xl font-bold mb-6 text-gray-900 leading-tight">
-                <span className="text-[#0F6435]">Farm</span>Quest: 
-                <span className="block mt-2">Farming Made Simple</span>
-              </h1>
-              
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Turn Your Thumb Green, No Experience Needed! Start your farming journey in minutes — grow crops, 
-                earn rewards, and turn your passion into profit.
-              </p>
-              
-              <div className="flex items-center gap-6 mb-12">
-                <div className="w-48">
-                  <GetStartedButton />
+
+              <div className="hidden lg:flex items-center gap-1 bg-black/20 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/10 shadow-lg">
+                {[
+                  { name: 'Home', href: '/' },
+                  { name: 'About Us', href: '/about' },
+                  { name: 'Solutions', href: '/solutions' },
+                  { name: 'Investors', href: '/investors' },
+                  { name: 'Success Story', href: '/stories' }
+                ].map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${item.name === 'Home'
+                      ? 'bg-white text-[#0F6435] shadow-sm'
+                      : 'text-white hover:bg-white/20'
+                      }`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+
+              <Link
+                href="/contact"
+                className="bg-white text-[#0F6435] px-6 py-2.5 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg active:scale-95 duration-200"
+              >
+                Contact Us
+              </Link>
+            </nav>
+
+            {/* Hero Content */}
+            <div className="relative z-10 flex flex-col items-center justify-center h-[calc(100%-120px)] text-center px-4 max-w-5xl mx-auto -mt-10">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full text-sm font-medium mb-6 uppercase tracking-wider">
+                  Sustainable Agriculture
                 </div>
-                <Link href="/learn-more" className="text-[#0F6435] font-medium hover:text-[#77AD3F] transition-colors flex items-center gap-2 group">
-                  Learn more
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-              
-              <div className="flex items-center gap-6">
-                <div className="flex -space-x-4">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-[#77AD3F] to-[#0F6435] border-2 border-white flex items-center justify-center text-white font-bold">
-                      {i}
+
+                <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-sm font-display">
+                  Smart Farming for <br />
+                  <span className="font-serif italic text-white font-light">Future Generations</span>
+                </h1>
+
+                <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed font-light drop-shadow-md">
+                  Turn Your Thumb Green, No Experience Needed! Start your farming journey in minutes — grow crops, earn rewards, and turn your passion into profit.
+                </p>
+
+                <div className="flex items-center justify-center gap-5">
+                  <Link href="/get-started" className="bg-[#D2F04E] text-[#0F6435] px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 hover:bg-[#c2e03e] transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(210,240,78,0.3)]">
+                    Start Farming <ArrowRight className="w-5 h-5" />
+                  </Link>
+
+                  <button className="group px-8 py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white font-medium hover:bg-white/20 transition-all flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/40 transition-colors">
+                      <Play className="w-3 h-3 fill-white ml-0.5" />
+                    </span>
+                    Meet the Farmers
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Bottom Elements */}
+            <div className="absolute bottom-12 left-12 z-20 text-white/80 font-medium text-sm tracking-widest flex items-center gap-3">
+              SCROLL <ArrowDown className="w-4 h-4 animate-bounce" />
+            </div>
+
+            <div className="absolute bottom-12 right-12 z-20">
+              <div className="bg-black/30 backdrop-blur-md rounded-full pl-2 pr-5 py-2 flex items-center gap-3 border border-white/10 shadow-xl">
+                <div className="flex -space-x-3">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className={`w-10 h-10 rounded-full border-2 border-[#1a1a1a] flex items-center justify-center overflow-hidden bg-white/20`}>
+                      {/* Placeholder for avatars */}
+                      <Users className="w-5 h-5 text-white/70" />
                     </div>
                   ))}
-                </div>
-                <p className="text-gray-600">
-                  <span className="font-semibold">1,000+</span> farmers joined this month
-                </p>
-              </div>
-            </motion.div>
-            
-            {/* Right Content Section - Updated with better globe image and card visibility */}
-            <motion.div 
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.7 }}
-              className="col-span-6 relative"
-            >
-              <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl border border-[#77AD3F]/20 overflow-hidden">
-                <Image src="/images/globe.png" alt="Globe" width={500} height={300} className="w-full h-auto" />
-              </div>
-              
-              {/* Improved floating stats cards with better visibility */}
-              <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="absolute top-10 -left-10 bg-white p-4 rounded-lg shadow-xl flex items-center gap-3 border-l-4 border-[#77AD3F] z-20"
-              >
-                <div className="bg-gradient-to-br from-[#77AD3F]/20 to-[#0F6435]/20 p-2 rounded-full">
-                  <Globe className="text-[#0F6435] h-6 w-6" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Crops Grown</p>
-                  <p className="text-lg font-bold text-gray-900">10M+</p>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="absolute bottom-10 -right-10 bg-white p-4 rounded-lg shadow-xl flex items-center gap-3 border-l-4 border-[#77AD3F] z-20"
-              >
-                <div className="bg-gradient-to-br from-[#77AD3F]/20 to-[#0F6435]/20 p-2 rounded-full">
-                  <Users className="text-[#0F6435] h-6 w-6" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Happy Farmers</p>
-                  <p className="text-lg font-bold text-gray-900">500+</p>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-        
-        {/* Why FarmQuest Section - Updated with variety and better UI */}
-        <div className="py-24 bg-gradient-to-br from-[#77AD3F]/10 to-white">
-          <div className="max-w-7xl mx-auto px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16"
-            >
-              <span className="inline-block px-4 py-1 bg-[#77AD3F]/20 text-[#0F6435] rounded-full text-sm font-medium mb-4">
-                Our Benefits
-              </span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose FarmQuest?</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                We&apos;ve reimagined farming for everyone - whether you&apos;re a beginner or a pro.
-              </p>
-            </motion.div>
-            
-            {/* Updated feature cards with more variety and professional design */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: <Leaf className="h-8 w-8 text-white" />,
-                  title: "No Experience Needed",
-                  description: "We guide you step-by-step from seed to harvest.",
-                  bgClass: "from-[#77AD3F] to-[#0F6435]"
-                },
-                {
-                  icon: <BarChart3 className="h-8 w-8 text-white" />,
-                  title: "Earn While You Grow",
-                  description: "Sell your crops back to us and make a steady side income.",
-                  bgClass: "from-[#0F6435] to-[#77AD3F]"
-                },
-                {
-                  icon: <Award className="h-8 w-8 text-white" />,
-                  title: "Gamified Experience",
-                  description: "Complete challenges, hit milestones, and earn QuestCoins.",
-                  bgClass: "from-[#77AD3F] to-[#0F6435]"
-                },
-                {
-                  icon: <ShieldCheck className="h-8 w-8 text-white" />,
-                  title: "Complete Farming Kits",
-                  description: "High-quality seeds, fertilizers, and tools shipped to your doorstep.",
-                  bgClass: "from-[#0F6435] to-[#77AD3F]"
-                },
-                {
-                  icon: <Users className="h-8 w-8 text-white" />,
-                  title: "Expert Support",
-                  description: "Our expert team is available 24/7 to help you grow with confidence.",
-                  bgClass: "from-[#77AD3F] to-[#0F6435]"
-                },
-                {
-                  icon: <Zap className="h-8 w-8 text-white" />,
-                  title: "Eco-Friendly & Sustainable",
-                  description: "Support sustainable agriculture and reduce your carbon footprint.",
-                  bgClass: "from-[#0F6435] to-[#77AD3F]"
-                }
-              ].map((feature, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
-                >
-                  <div className="h-full flex flex-col">
-                    <div className={`bg-gradient-to-br ${feature.bgClass} p-6`}>
-                      <div className="bg-white/20 p-3 rounded-full w-fit mb-4">
-                        {feature.icon}
-                      </div>
-                    </div>
-                    <div className="p-6 flex-1 flex flex-col">
-                      <h3 className="text-xl font-semibold mb-3 text-gray-800 group-hover:text-[#0F6435] transition-colors">
-                        {feature.title}
-                      </h3>
-                      <p className="text-gray-600">{feature.description}</p>
-                    </div>
+                  <div className="w-10 h-10 rounded-full bg-[#D2F04E] border-2 border-[#1a1a1a] flex items-center justify-center text-[#0F6435] font-bold text-xs relative z-10">
+                    <Star className="w-3 h-3 fill-current" /> 4.9
                   </div>
-                </motion.div>
-              ))}
+                </div>
+                <div>
+                  <p className="text-white text-sm font-bold">10k+ Farmers</p>
+                  <p className="text-white/60 text-xs">Joined this week</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Trusted By Section */}
+        <div className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+              <p className="text-sm font-semibold text-gray-500 max-w-[150px] leading-tight">
+                Trusted by thousand companies in the world
+              </p>
+              <div className="flex-1 flex flex-wrap justify-between items-center gap-8">
+                {['CHASE', 'JOHN DEERE', 'Leader', 'Kubota', 'GLEANER'].map((name, i) => (
+                  <span key={i} className="text-xl md:text-2xl font-bold font-serif text-gray-400 hover:text-[#0F6435] transition-colors cursor-pointer">
+                    {name}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        
-        {/* How It Works Section - Updated with more variety */}
+
+        {/* Mission Statement */}
+        <div className="py-24 bg-[#FAFAFA]">
+          <div className="max-w-5xl mx-auto px-8 text-center relative">
+            <div className="absolute top-0 left-8 bg-white px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500">
+              • Cultiva Legacy
+            </div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-3xl md:text-5xl font-medium text-[#1a1a1a] leading-tight mt-8"
+            >
+              Our platform is built to support farmers, agribusinesses, and agricultural innovators
+              <span className="text-gray-400"> by delivering </span>
+              <span className="inline-flex items-center align-middle mx-2">
+                <div className="w-16 h-10 bg-gray-200 rounded-full overflow-hidden relative">
+                  <Image src="/images/plant-1.png" alt="Nature" fill className="object-cover" />
+                </div>
+              </span>
+              <span className="text-gray-400"> practical tools that respect the land while improving productivity.</span>
+            </motion.h2>
+          </div>
+        </div>
+
+        {/* Strategies / Solutions Section */}
         <div className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16"
-            >
-              <span className="inline-block px-4 py-1 bg-[#77AD3F]/20 text-[#0F6435] rounded-full text-sm font-medium mb-4">
-                Simple Process
-              </span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Get started in minutes with our simple 4-step process
-              </p>
-            </motion.div>
-            
-            {/* Updated process steps with more variety and professional design */}
-            <div className="relative">
-              <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[#77AD3F] to-[#0F6435] -translate-y-1/2 hidden md:block"></div>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-                {[
-                  {
-                    step: "1",
-                    icon: <Users className="h-6 w-6" />,
-                    title: "Sign Up",
-                    description: "Create your FarmQuest profile in under 2 minutes — no complicated forms or hidden fees!"
-                  },
-                  {
-                    step: "2",
-                    icon: <Sprout className="h-6 w-6" />,
-                    title: "Customize Your Farm",
-                    description: "Choose what kind of farm you want: Indoor/Outdoor, Small/Large, Vegetables, fruits, or herbs."
-                  },
-                  {
-                    step: "3",
-                    icon: <ShieldCheck className="h-6 w-6" />,
-                    title: "Get Your Kit",
-                    description: "We deliver everything you need: High-quality seeds, organic fertilizers, essential tools, and step-by-step instructions."
-                  },
-                  {
-                    step: "4",
-                    icon: <Award className="h-6 w-6" />,
-                    title: "Grow & Earn",
-                    description: "Upload weekly progress photos, complete challenges and milestones, earn QuestCoins for extra rewards."
-                  }
-                ].map((step, i) => (
-                  <motion.div 
-                    key={i}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.2 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="relative"
-                  >
-                    <div className="bg-white p-8 rounded-xl shadow-lg border border-[#77AD3F]/20 h-full z-10 relative">
-                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-br from-[#77AD3F] to-[#0F6435] text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shadow-lg z-20">
-                        {step.step}
-                      </div>
-                      <div className="pt-6">
-                        <div className="flex justify-center mb-4">
-                          <div className="p-3 rounded-full bg-[#77AD3F]/20 text-[#0F6435]">
-                            {step.icon}
-                          </div>
-                        </div>
-                        <h3 className="text-xl font-semibold mb-3 text-gray-800 text-center">{step.title}</h3>
-                        <p className="text-gray-600 text-center">{step.description}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+          <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div className="lg:col-span-5">
+              <div className="bg-white px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500 w-fit mb-6">
+                • About FarmQuest
               </div>
+              <h2 className="text-5xl font-medium text-[#1a1a1a] mb-2">
+                Smart Farming Solutions
+              </h2>
+              <h3 className="text-5xl font-serif italic text-[#1a1a1a] mb-8">
+                That Deliver Real Results
+              </h3>
             </div>
-          </div>
-        </div>
-        
-        {/* Testimonials Section - Updated with better design */}
-        <div className="py-24 bg-gradient-to-br from-[#77AD3F]/10 to-white">
-          <div className="max-w-7xl mx-auto px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16"
-            >
-              <span className="inline-block px-4 py-1 bg-[#77AD3F]/20 text-[#0F6435] rounded-full text-sm font-medium mb-4">
-                Success Stories
-              </span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Why People Love FarmQuest</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Join thousands of happy farmers who are growing crops and earning rewards
-              </p>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div className="lg:col-span-7 space-y-4">
               {[
                 {
-                  quote: "It&apos;s fun, easy, and actually makes me money!",
-                  author: "Sarah K.",
-                  role: "Urban Farmer",
-                  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80"
+                  title: "Proven Farm Productivity",
+                  content: "Our systems have been tested across 500+ farms, showing an average yield increase of 25% within the first harvest cycle."
                 },
                 {
-                  quote: "I&apos;ve never farmed before, but now I have fresh veggies AND extra cash!",
-                  author: "Michael T.",
-                  role: "Beginner Farmer",
-                  image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80"
+                  title: "Intelligent Crop Optimization",
+                  content: "Our AI powered system analyzes soil health, weather patterns, irrigation cycles, and crop growth data to recommend the most effective actions automatically, improving yield and reducing risk.",
+                  isOpen: true,
+                  icon: <Leaf className="w-5 h-5 text-[#0F6435]" />
                 },
                 {
-                  quote: "FarmQuest turned my hobby into a side hustle. The gamification makes it addictive!",
-                  author: "Jessica L.",
-                  role: "Weekend Farmer",
-                  image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80"
+                  title: "Seamless Farm System Integration",
+                  content: "Connect with your existing John Deere, Kubota, and other smart farming equipment through our universal API."
+                },
+                {
+                  title: "Smart Water & Resource Management",
+                  content: "Reduce water usage by up to 40% with precision irrigation schedules customized for your crop type and soil conditions."
                 }
-              ].map((testimonial, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-[#77AD3F]/20"
-                >
-                  <div className="flex mb-6">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-gray-700 italic mb-6 text-lg">&quot;{testimonial.quote}&quot;</p>
-                  <div className="flex items-center">
-                    <img src={testimonial.image} alt={testimonial.author} className="w-12 h-12 rounded-full mr-4" />
-                    <div>
-                      <p className="font-semibold text-gray-800">{testimonial.author}</p>
-                      <p className="text-[#0F6435] text-sm">{testimonial.role}</p>
+              ].map((item, i) => (
+                <div key={i} className={`p-6 rounded-2xl transition-all duration-300 ${activeSolution === i ? 'bg-gray-50' : 'bg-gray-50 hover:bg-gray-100'}`}>
+                  <div
+                    className="flex justify-between items-start cursor-pointer group"
+                    onClick={() => setActiveSolution(activeSolution === i ? null : i)}
+                  >
+                    <div className="flex items-center gap-4">
+                      {activeSolution === i && (
+                        <div className="bg-[#D2F04E] p-2 rounded-lg">
+                          {item.icon || <Leaf className="w-5 h-5 text-[#0F6435]" />}
+                        </div>
+                      )}
+                      <h4 className="text-xl font-medium text-[#1a1a1a]">{item.title}</h4>
                     </div>
+                    {activeSolution === i ? <Minus className="w-6 h-6 text-[#1a1a1a]" /> : <Plus className="w-6 h-6 text-gray-400 group-hover:text-[#1a1a1a]" />}
                   </div>
-                </motion.div>
+
+                  {activeSolution === i && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="mt-4 pl-14 text-gray-600 leading-relaxed"
+                    >
+                      {item.content}
+                    </motion.div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
         </div>
-        
-        {/* Trust indicators - Updated with better design */}
-        <div className="py-16 bg-gradient-to-br from-[#77AD3F]/10 to-white">
+
+        {/* Feature Cards Section */}
+        <div className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <p className="text-center text-gray-500 mb-10 font-medium">Trusted by leading organizations worldwide</p>
-              <div className="flex flex-wrap justify-between items-center gap-8">
-                {['Agri-Tech', 'EcoFarms', 'GreenGrow', 'SustainCrop', 'FarmFuture'].map((name, i) => (
-                  <motion.div 
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center justify-center"
-                  >
-                    <div className="h-16 px-8 bg-white rounded-lg shadow-md flex items-center justify-center text-[#0F6435] font-semibold border border-[#77AD3F]/20">
-                      {name}
-                    </div>
-                  </motion.div>
-                ))}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <p className="text-gray-600 text-lg">
+                We empower farmers with intelligent tools and data-driven insights to increase yields, reduce costs, and build a more sustainable agricultural future.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Card 1 */}
+              <div className="group cursor-pointer">
+                <div className="relative h-[500px] rounded-[2rem] overflow-hidden mb-6">
+                  <div className="absolute inset-0 bg-gray-200 group-hover:scale-105 transition-transform duration-700">
+                    <Image src="/images/background.png" alt="Automation" fill className="object-cover" />
+                  </div>
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <h3 className="text-3xl font-medium text-[#1a1a1a] mb-3">Automation</h3>
+                <p className="text-gray-600 text-lg">Streamline planting, harvesting, and operations to save time, cut costs, and boost efficiency.</p>
               </div>
-            </motion.div>
+
+              {/* Card 2 */}
+              <div className="group cursor-pointer mt-12 md:mt-0">
+                <div className="relative h-[500px] rounded-[2rem] overflow-hidden mb-6">
+                  <div className="absolute inset-0 bg-gray-200 group-hover:scale-105 transition-transform duration-700">
+                    <Image src="/images/globe.png" alt="Sustainable" fill className="object-cover" />
+                  </div>
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <h3 className="text-3xl font-medium text-[#1a1a1a] mb-3">Sustainable Agriculture</h3>
+                <p className="text-gray-600 text-lg">Protect soil, conserve resources, and grow healthy crops for the long term.</p>
+              </div>
+            </div>
           </div>
         </div>
-        
+
         {/* Carbon Credits Impact Section - NEW */}
         <div className="py-24 bg-black relative overflow-hidden">
           {/* Background Pattern */}
@@ -475,11 +358,11 @@ export default function Home() {
               <rect width="100%" height="100%" fill="url(#circles)" />
             </svg>
           </div>
-          
+
           {/* Glowing orbs */}
           <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#77AD3F] filter blur-[100px] opacity-20"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-[#0F6435] filter blur-[120px] opacity-15"></div>
-          
+
           <div className="max-w-7xl mx-auto px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -496,7 +379,7 @@ export default function Home() {
                 Together, we&apos;re making a measurable difference in the fight against climate change
               </p>
             </motion.div>
-            
+
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
               {[
@@ -525,7 +408,7 @@ export default function Home() {
                   trend: "+3% this month"
                 }
               ].map((stat, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -544,7 +427,7 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
-            
+
             {/* Graph and Info Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Left side - Graph */}
@@ -556,33 +439,33 @@ export default function Home() {
                 className="bg-gray-900 border border-[#77AD3F]/30 rounded-xl p-6 relative overflow-hidden"
               >
                 <h3 className="text-xl font-semibold text-white mb-6">Carbon Credits Generated (2023-2024)</h3>
-                
+
                 {/* SVG Graph */}
                 <div className="relative h-64">
                   <svg className="w-full h-full" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                     {/* Grid lines */}
                     <g className="grid-lines">
                       {[0, 1, 2, 3, 4].map((i) => (
-                        <line 
-                          key={i} 
-                          x1="0" 
-                          y1={i * 50} 
-                          x2="400" 
-                          y2={i * 50} 
-                          stroke="#333" 
-                          strokeWidth="1" 
-                          strokeDasharray="5,5" 
+                        <line
+                          key={i}
+                          x1="0"
+                          y1={i * 50}
+                          x2="400"
+                          y2={i * 50}
+                          stroke="#333"
+                          strokeWidth="1"
+                          strokeDasharray="5,5"
                         />
                       ))}
                     </g>
-                    
+
                     {/* X-axis labels */}
                     <g className="x-labels text-xs" textAnchor="middle">
                       {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, i) => (
                         <text key={i} x={i * 33 + 16} y="220" fill="#999">{month}</text>
                       ))}
                     </g>
-                    
+
                     {/* Area chart */}
                     <defs>
                       <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -590,40 +473,40 @@ export default function Home() {
                         <stop offset="100%" stopColor="#0F6435" stopOpacity="0.1" />
                       </linearGradient>
                     </defs>
-                    
+
                     {/* Line chart */}
-                    <path 
-                      d="M0,180 C20,160 40,150 60,140 C80,130 100,120 120,100 C140,80 160,70 180,60 C200,50 220,45 240,40 C260,35 280,30 300,25 C320,20 340,15 360,10 C380,5 400,0 400,0" 
-                      fill="none" 
-                      stroke="#77AD3F" 
-                      strokeWidth="3" 
+                    <path
+                      d="M0,180 C20,160 40,150 60,140 C80,130 100,120 120,100 C140,80 160,70 180,60 C200,50 220,45 240,40 C260,35 280,30 300,25 C320,20 340,15 360,10 C380,5 400,0 400,0"
+                      fill="none"
+                      stroke="#77AD3F"
+                      strokeWidth="3"
                     />
-                    
+
                     {/* Area under the line */}
-                    <path 
-                      d="M0,180 C20,160 40,150 60,140 C80,130 100,120 120,100 C140,80 160,70 180,60 C200,50 220,45 240,40 C260,35 280,30 300,25 C320,20 340,15 360,10 C380,5 400,0 400,0 V200 H0 Z" 
-                      fill="url(#greenGradient)" 
+                    <path
+                      d="M0,180 C20,160 40,150 60,140 C80,130 100,120 120,100 C140,80 160,70 180,60 C200,50 220,45 240,40 C260,35 280,30 300,25 C320,20 340,15 360,10 C380,5 400,0 400,0 V200 H0 Z"
+                      fill="url(#greenGradient)"
                     />
-                    
+
                     {/* Data points */}
                     {[
-                      {x: 0, y: 180}, {x: 33, y: 150}, {x: 66, y: 140}, 
-                      {x: 99, y: 100}, {x: 132, y: 60}, {x: 165, y: 40}, 
-                      {x: 198, y: 30}, {x: 231, y: 25}, {x: 264, y: 20}, 
-                      {x: 297, y: 15}, {x: 330, y: 10}, {x: 363, y: 5}
+                      { x: 0, y: 180 }, { x: 33, y: 150 }, { x: 66, y: 140 },
+                      { x: 99, y: 100 }, { x: 132, y: 60 }, { x: 165, y: 40 },
+                      { x: 198, y: 30 }, { x: 231, y: 25 }, { x: 264, y: 20 },
+                      { x: 297, y: 15 }, { x: 330, y: 10 }, { x: 363, y: 5 }
                     ].map((point, i) => (
-                      <circle 
-                        key={i} 
-                        cx={point.x} 
-                        cy={point.y} 
-                        r="4" 
-                        fill="#77AD3F" 
-                        stroke="#0F6435" 
-                        strokeWidth="2" 
+                      <circle
+                        key={i}
+                        cx={point.x}
+                        cy={point.y}
+                        r="4"
+                        fill="#77AD3F"
+                        stroke="#0F6435"
+                        strokeWidth="2"
                       />
                     ))}
                   </svg>
-                  
+
                   {/* Y-axis labels */}
                   <div className="absolute top-0 left-0 h-full flex flex-col justify-between text-xs text-gray-500 py-2">
                     <span>200K</span>
@@ -633,7 +516,7 @@ export default function Home() {
                     <span>0</span>
                   </div>
                 </div>
-                
+
                 <div className="mt-6 flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-[#77AD3F]"></div>
@@ -642,7 +525,7 @@ export default function Home() {
                   <span className="text-[#77AD3F] font-medium">+186% YoY Growth</span>
                 </div>
               </motion.div>
-              
+
               {/* Right side - Info */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
@@ -655,7 +538,7 @@ export default function Home() {
                 <p className="text-gray-300">
                   FarmQuest&apos;s innovative carbon credit system rewards sustainable farming practices while making a measurable impact on climate change.
                 </p>
-                
+
                 <div className="space-y-6 mt-8">
                   {[
                     {
@@ -674,7 +557,7 @@ export default function Home() {
                       icon: <BarChart3 className="h-6 w-6" />
                     }
                   ].map((item, i) => (
-                    <motion.div 
+                    <motion.div
                       key={i}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -692,7 +575,7 @@ export default function Home() {
                     </motion.div>
                   ))}
                 </div>
-                
+
                 <div className="bg-gray-900 border border-[#77AD3F]/30 rounded-xl p-6 mt-8">
                   <div className="flex justify-between items-center mb-4">
                     <h4 className="text-white font-semibold">Total Environmental Impact</h4>
@@ -711,7 +594,7 @@ export default function Home() {
                 </div>
               </motion.div>
             </div>
-            
+
             {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -729,237 +612,156 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-        
-        {/* Big CTA with Background Grid */}
-        <div className="py-32 relative overflow-hidden">
-          {/* Background Grid */}
-          <div className="absolute inset-0">
-            {isClient && <BackgroundGrid isClient={true} />}
-          </div>
-          
-          <div className="max-w-7xl mx-auto px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-12 md:p-16"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                  <span className="inline-block px-4 py-1 bg-[#77AD3F]/20 text-[#0F6435] rounded-full text-sm font-medium mb-6">
-                    Limited Time Offer
-                  </span>
-                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                    Start Your Farming Journey Today
-                  </h2>
-                  <p className="text-xl text-gray-700 mb-8">
-                    Get 20% off your first farming kit and free access to our premium growing guides.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <button className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white hover:from-[#6A9D35] hover:to-[#0A5A2F] transition-colors duration-300 font-semibold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-transform flex items-center justify-center">
-                      <Sprout className="mr-2 h-5 w-5" /> Get Started Now
-                    </button>
-                    <button className="bg-white text-[#0F6435] border-2 border-[#0F6435] hover:bg-[#0F6435]/10 transition-colors duration-300 font-semibold py-4 px-8 rounded-full text-lg flex items-center justify-center">
-                      <MessageSquare className="mr-2 h-5 w-5" /> Talk to an Expert
-                    </button>
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="absolute -top-10 -left-10 w-24 h-24 bg-[#77AD3F]/30 rounded-full filter blur-xl"></div>
-                  <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#0F6435]/30 rounded-full filter blur-xl"></div>
-                  <div className="bg-white rounded-2xl shadow-lg p-6 relative">
-                    <div className="absolute top-0 right-0 bg-[#77AD3F] text-white px-4 py-2 rounded-bl-lg rounded-tr-lg font-bold">
-                      20% OFF
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">Starter Farming Kit</h3>
-                    <ul className="space-y-3 mb-6">
-                      {[
-                        "Premium quality seeds",
-                        "Organic soil and fertilizer",
-                        "Essential farming tools",
-                        "Step-by-step growing guide",
-                        "24/7 expert support"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-center">
-                          <CheckCircle className="h-5 w-5 text-[#77AD3F] mr-2" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-end">
-                        <span className="text-3xl font-bold text-gray-900">$79</span>
-                        <span className="text-lg text-gray-500 line-through ml-2">$99</span>
-                      </div>
-                      <span className="text-sm text-gray-600">Free shipping</span>
-                    </div>
-                    <div className="bg-[#77AD3F]/10 p-3 rounded-lg text-sm text-[#0F6435] mb-4">
-                      <span className="font-medium">Limited offer:</span> First 100 customers get a free herb garden expansion pack!
-                    </div>
-                  </div>
-                </div>
+
+        {/* Testimonials Section - NEW Design */}
+        <div className="py-24 bg-white relative">
+          <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="text-5xl text-[#0F6435] mb-6 font-serif">“</div>
+              <h2 className="text-3xl md:text-5xl font-medium text-[#1a1a1a] leading-tight mb-8">
+                Real-time field data completely changed how we manage our crops. We&apos;re making smarter decisions and seeing healthier yields season after season.
+              </h2>
+              <div>
+                <h4 className="font-bold text-lg text-[#1a1a1a]">Sarah Williams</h4>
+                <p className="text-gray-500">CropSense, California</p>
               </div>
-            </motion.div>
+              <div className="mt-8 flex gap-4">
+                <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+                  <ArrowRight className="w-5 h-5 rotate-180" />
+                </button>
+                <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+            <div className="relative h-[600px] w-full bg-gray-100 rounded-[2rem] overflow-hidden">
+              <Image src="/images/background.png" alt="Testimonial" fill className="object-cover" />
+            </div>
           </div>
         </div>
-        
-        {/* FAQ Section - Updated with better design */}
+
+        {/* FAQ Section */}
         <div className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16"
-            >
-              <span className="inline-block px-4 py-1 bg-[#77AD3F]/20 text-[#0F6435] rounded-full text-sm font-medium mb-4">
-                Common Questions
-              </span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Everything you need to know about FarmQuest
+          <div className="max-w-3xl mx-auto px-8 text-center mb-16">
+            <div className="bg-white px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500 w-fit mx-auto mb-6">
+              • FAQ
+            </div>
+            <h2 className="text-5xl font-medium text-[#1a1a1a]">
+              Common Farmer <span className="font-serif italic">Questions</span>
+            </h2>
+            <p className="text-gray-600 mt-4">
+              Got questions? We&apos;ve got answers to help you get the most out of FarmQuest.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto px-8 space-y-4">
+            {[
+              { q: "How does FarmQuest help with crop rotation?", a: "Our AI analyzes your soil history and recommends optimal crop rotation schedules to maintain soil health and maximize yields." },
+              { q: "Can I integrate my existing irrigation system?", a: "Yes, FarmQuest is compatible with major smart irrigation systems including John Deere, Netafim, and Rain Bird via our universal API." },
+              { q: "Is the platform suitable for small-scale organic farms?", a: "Absolutely. We have specific modules designed for organic certification tracking and small-scale resource management." },
+              { q: "How accurate are the weather predictions?", a: "We aggregate data from local stations, satellite imagery, and global models to provide hyper-local forecasts with 90%+ accuracy." },
+              { q: "Does FarmQuest support sustainable farming?", a: "Sustainability is our core mission. We provide tools for carbon footprint tracking, water conservation, and regenerative farming practices." }
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-[#F9F9F9] rounded-xl p-6 cursor-pointer hover:bg-gray-100 transition-all duration-300"
+                onClick={() => setActiveFAQ(activeFAQ === i ? null : i)}
+              >
+                <div className="flex justify-between items-center">
+                  <h4 className="text-lg font-medium text-[#1a1a1a]">{item.q}</h4>
+                  {activeFAQ === i ? <Minus className="w-5 h-5 text-[#1a1a1a]" /> : <Plus className="w-5 h-5 text-gray-400" />}
+                </div>
+                {activeFAQ === i && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="mt-4 text-gray-600 leading-relaxed"
+                  >
+                    {item.a}
+                  </motion.div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer CTA */}
+        <div className="py-12 px-4 md:px-8 bg-white pb-0">
+          <div className="max-w-7xl mx-auto relative rounded-t-[3rem] bg-[#FAFAFA] overflow-hidden">
+            <div className="absolute inset-x-0 bottom-0 top-1/2 bg-white/50 backdrop-blur-sm z-0"></div>
+
+            <div className="relative z-10 pt-24 px-8 pb-32 text-center">
+              <h2 className="text-4xl md:text-6xl font-medium text-[#1a1a1a] max-w-4xl mx-auto leading-tight mb-4">
+                Make farming smarter,
+                <br />
+                <span className="font-serif italic">stronger, and simpler</span>
+              </h2>
+              <p className="text-gray-600 max-w-xl mx-auto mb-10">
+                Straightforward answers to help you make confident decisions for your farm.
               </p>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  question: "Do I need farming experience?",
-                  answer: "Nope! FarmQuest guides you every step of the way."
-                },
-                {
-                  question: "How do I earn QuestCoins?",
-                  answer: "Complete challenges, hit growth milestones, and engage with the platform."
-                },
-                {
-                  question: "What if my crops fail?",
-                  answer: "We&apos;ve got you covered! Our expert support team is here to help you troubleshoot."
-                },
-                {
-                  question: "How long does it take to grow crops?",
-                  answer: "It depends on the crop type, but most crops take 4–8 weeks to reach harvest."
-                },
-                {
-                  question: "What if I don&apos;t have outdoor space?",
-                  answer: "No worries! We offer indoor farming kits with everything you need."
-                },
-                {
-                  question: "Can I farm during the winter?",
-                  answer: "Yes! Our indoor kits are designed for year-round farming."
-                }
-              ].map((faq, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-[#77AD3F]/20 group"
-                >
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800 group-hover:text-[#0F6435] transition-colors flex items-center">
-                    <span className="bg-[#77AD3F]/20 text-[#0F6435] w-8 h-8 rounded-full flex items-center justify-center mr-3 font-bold">Q</span>
-                    {faq.question}
-                  </h3>
-                  <p className="text-gray-600 ml-11">{faq.answer}</p>
-                </motion.div>
-              ))}
+              <button className="bg-[#1F4529] text-white px-8 py-4 rounded-full font-medium hover:bg-[#15301c] transition-colors shadow-lg shadow-[#1F4529]/20">
+                Contact Us
+              </button>
+            </div>
+
+            {/* Footer Links - Glassmorphism Card */}
+            <div className="relative z-20 mx-4 md:mx-8 mb-8 bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-gray-100">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div className="col-span-1">
+                  <div className="flex items-center gap-2 mb-6">
+                    <Logo />
+                  </div>
+                  <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+                    FarmQuest empowers farmers with smart tools for better yields and sustainable growth.
+                  </p>
+                  <div className="flex gap-4">
+                    {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
+                      <a key={i} href="#" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#D2F04E] hover:text-black transition-colors">
+                        <Icon className="w-4 h-4" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-[#1a1a1a] mb-6">Quick Links</h4>
+                  <ul className="space-y-4 text-gray-500 text-sm">
+                    {['Home', 'About', 'Services', 'Contact'].map(item => (
+                      <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-[#1a1a1a] mb-6">Services</h4>
+                  <ul className="space-y-4 text-gray-500 text-sm">
+                    {['Smart Crop Monitoring', 'Precision Irrigation Systems', 'Soil & Weather Analytics', 'Maintenance & Support'].map(item => (
+                      <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-[#1a1a1a] mb-6">Company</h4>
+                  <ul className="space-y-4 text-gray-500 text-sm">
+                    {['Contact Us', 'Emergency Help', 'FAQ', 'Privacy Policy'].map(item => (
+                      <li key={item}><a href="#" className="hover:text-[#0F6435] transition-colors">{item}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-100 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>© 2026 FarmQuest. All rights reserved.</p>
+                <div className="flex gap-6 mt-4 md:mt-0">
+                  <a href="#" className="hover:text-gray-600">Terms of Service</a>
+                  <a href="#" className="hover:text-gray-600">Privacy Policy</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        
-        {/* Footer */}
-        <footer className="bg-gray-900 text-white py-20">
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-              <div className="col-span-1 md:col-span-1">
-                <Logo />
-                <p className="mt-6 text-gray-400 leading-relaxed">
-                  FarmQuest is revolutionizing farming with our innovative platform that makes growing crops accessible, profitable, and fun for everyone.
-                </p>
-                <div className="mt-8 flex space-x-4">
-                  {[
-                    { name: 'facebook', icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg> },
-                    { name: 'twitter', icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg> },
-                    { name: 'instagram', icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg> },
-                    { name: 'linkedin', icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg> }
-                  ].map((social) => (
-                    <a 
-                      key={social.name} 
-                      href={`#${social.name}`} 
-                      className="bg-gray-800 hover:bg-[#77AD3F] transition-colors duration-300 w-10 h-10 rounded-full flex items-center justify-center"
-                    >
-                      <span className="sr-only">{social.name}</span>
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold mb-6 text-[#77AD3F]">Company</h3>
-                <ul className="space-y-4">
-                  {['About Us', 'Careers', 'Blog', 'Press', 'Contact'].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold mb-6 text-[#77AD3F]">Resources</h3>
-                <ul className="space-y-4">
-                  {['Farming Guide', 'Community', 'Help Center', 'Partners', 'Privacy Policy'].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold mb-6 text-[#77AD3F]">Subscribe</h3>
-                <p className="text-gray-400 mb-4">
-                  Get the latest news and updates from FarmQuest.
-                </p>
-                <div className="flex">
-                  <input 
-                    type="email" 
-                    placeholder="Your email" 
-                    className="bg-gray-800 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-[#77AD3F] w-full"
-                  />
-                  <button className="bg-[#77AD3F] hover:bg-[#0F6435] transition-colors duration-300 px-4 py-2 rounded-r-md">
-                    <ArrowRight className="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm">
-                © {new Date().getFullYear()} FarmQuest. All rights reserved.
-              </p>
-              <div className="mt-4 md:mt-0 flex space-x-6">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-                  Terms of Service
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-                  Privacy Policy
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-                  Cookie Policy
-                </a>
-              </div>
-            </div>
-          </div>
-        </footer>
-        
+
         {/* Floating Chat Button */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -967,7 +769,7 @@ export default function Home() {
           transition={{ delay: 1, duration: 0.3 }}
           className="fixed bottom-8 right-8 z-50"
         >
-          <button 
+          <button
             className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
             aria-label="Chat with us"
           >
@@ -977,7 +779,7 @@ export default function Home() {
             </span>
           </button>
         </motion.div>
-        
+
         {/* Scroll to top button */}
         <motion.button
           initial={{ opacity: 0 }}
@@ -989,7 +791,7 @@ export default function Home() {
         >
           <ChevronUp className="h-6 w-6" />
         </motion.button>
-        
+
         {/* Cookie consent banner */}
         <motion.div
           initial={{ y: 100, opacity: 0 }}
@@ -1015,7 +817,7 @@ export default function Home() {
         </motion.div>
       </div>
 
-     
+
     </main>
   );
 }
