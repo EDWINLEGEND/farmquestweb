@@ -697,10 +697,12 @@ export default function Home() {
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60"></div>
+            {/* Top gradient to blend with white section above */}
+            <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-white via-white/60 to-transparent z-10"></div>
           </div>
 
           {/* Main Content Wrapper */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 pt-32 pb-8 flex flex-col h-full justify-between">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 pt-48 pb-8 flex flex-col h-full justify-between">
 
             {/* Top CTA Section */}
             <div className="text-center mb-16 md:mb-24">
