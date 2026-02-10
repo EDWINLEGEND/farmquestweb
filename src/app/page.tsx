@@ -218,22 +218,62 @@ export default function Home() {
               • Cultiva Legacy
             </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.3 }}
-              className="text-3xl md:text-5xl font-medium text-[#1a1a1a] leading-tight mt-8"
-            >
-              Our platform is built to support farmers, agribusinesses, and agricultural innovators
-              <span className="text-gray-400"> by delivering </span>
-              <span className="inline-flex items-center align-middle mx-2 translate-y-1">
+            <h2 className="text-3xl md:text-5xl font-medium leading-tight mt-8 text-center">
+              {/* Part 1 */}
+              {"Our platform is built to support farmers, agribusinesses, and agricultural innovators".split(" ").map((word, i) => (
+                <motion.span
+                  key={`part1-${i}`}
+                  initial={{ opacity: 0.2, color: "#9CA3AF" }}
+                  whileInView={{ opacity: 1, color: "#1a1a1a" }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                  viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                  className="inline-block mr-[0.2em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+
+              {/* Part 2 */}
+              {"by delivering".split(" ").map((word, i) => (
+                <motion.span
+                  key={`part2-${i}`}
+                  initial={{ opacity: 0.2, color: "#9CA3AF" }}
+                  whileInView={{ opacity: 1, color: "#1a1a1a" }}
+                  transition={{ duration: 0.5, delay: (12 + i) * 0.05 }} // Offset based on previous word count
+                  viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                  className="inline-block mr-[0.2em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+
+              {/* Image Reveal */}
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                className="inline-flex items-center align-middle mx-2 translate-y-1"
+              >
                 <div className="w-20 h-10 bg-gray-200 rounded-full overflow-hidden relative shadow-sm">
                   <Image src="/images/plant-1.png" alt="Nature" fill className="object-cover" />
                 </div>
-              </span>
-              <span className="text-gray-400"> practical tools that respect the land while improving productivity.</span>
-            </motion.h2>
+              </motion.span>
+
+              {/* Part 3 */}
+              {"practical tools that respect the land while improving productivity.".split(" ").map((word, i) => (
+                <motion.span
+                  key={`part3-${i}`}
+                  initial={{ opacity: 0.2, color: "#9CA3AF" }}
+                  whileInView={{ opacity: 1, color: "#1a1a1a" }}
+                  transition={{ duration: 0.5, delay: (15 + i) * 0.05 }}
+                  viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                  className="inline-block mr-[0.2em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h2>
           </div>
         </div>
 
