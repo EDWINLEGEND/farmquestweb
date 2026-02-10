@@ -67,7 +67,7 @@ export default function FarmsPage() {
   const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [farms, setFarms] = useState<FarmType[]>(dummyFarms);
-  
+
   useEffect(() => {
     const fetchFarms = async () => {
       try {
@@ -112,10 +112,10 @@ export default function FarmsPage() {
       type: farmData.type,
     };
     console.log(newFarm);
-    
+
     // Update farms state (you would need to modify this to use setFarms)
     // setFarms([...farms, newFarm]);
-    
+
     // Close the modal
     setIsAddModalOpen(false);
   };
@@ -128,12 +128,12 @@ export default function FarmsPage() {
   return (
     <div className="container mx-auto px-4 py-6 md:py-20 min-h-screen bg-white">
       {/* Add Farm Modal */}
-      <AddFarmModal 
-        isOpen={isAddModalOpen} 
-        onClose={() => setIsAddModalOpen(false)} 
-        onSubmit={handleAddFarm} 
+      <AddFarmModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSubmit={handleAddFarm}
       />
-      
+
       {/* Header with search - Responsive layout */}
       <div className="mb-6 md:mb-10">
         <div className="flex justify-between items-center mb-4">
@@ -150,20 +150,20 @@ export default function FarmsPage() {
           </div>
           <div className="flex items-center gap-3">
             <div className="relative">
-              <motion.div 
+              <motion.div
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors" 
+                className="w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors"
                 onClick={() => setIsSearchVisible(!isSearchVisible)}
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                   className="text-gray-500"
                 >
@@ -172,7 +172,7 @@ export default function FarmsPage() {
                 </svg>
               </motion.div>
             </div>
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="w-10 h-10 md:w-12 md:h-12 bg-black rounded-full flex items-center justify-center hover:bg-green-800 transition-colors cursor-pointer"
@@ -184,44 +184,44 @@ export default function FarmsPage() {
             </motion.div>
           </div>
         </div>
-        
+
         {isSearchVisible && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="mt-2"
           >
             <div className="relative">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="20" 
-                height="20" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               >
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input 
-                type="text" 
-                placeholder="Search farms..." 
+              <input
+                type="text"
+                placeholder="Search farms..."
                 className="w-full border border-gray-300 rounded-full py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
               />
             </div>
           </motion.div>
         )}
       </div>
-      
+
       {/* Promo banner - Responsive layout */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-green-100 to-green-50 min-h-28 md:min-h-40 rounded-2xl relative p-6 md:p-8 mb-8 flex justify-between items-center overflow-hidden shadow-sm"
+        className="bg-green-100 min-h-28 md:min-h-40 rounded-2xl relative p-6 md:p-8 mb-8 flex justify-between items-center overflow-hidden shadow-sm"
       >
         <div className="z-10 max-w-lg">
           <h3 className="text-2xl md:text-3xl font-bold mb-2">Kerala Home Farming</h3>
@@ -230,14 +230,14 @@ export default function FarmsPage() {
             Kerala Farming Tips
           </button>
         </div>
-        <div className="absolute right-0 top-0 h-full w-1/2 md:w-2/5">
+        <div className="absolute right-0 top-0 h-full w-1/2 md:w-3/5">
           <div className="relative h-full w-full">
             <img
               src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               alt="Kerala home farming"
               className="object-cover rounded-r-2xl absolute inset-0 h-full w-full"
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-green-100/90"></div>
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-green-100/20 to-green-100"></div>
           </div>
         </div>
       </motion.div>
@@ -251,8 +251,8 @@ export default function FarmsPage() {
             onClick={() => setActiveFilter(filter as "All" | "Active" | "Inactive")}
             className={cn(
               "px-6 py-2.5 rounded-full border transition-all whitespace-nowrap font-medium",
-              activeFilter === filter 
-                ? "bg-black text-white border-black shadow-md" 
+              activeFilter === filter
+                ? "bg-black text-white border-black shadow-md"
                 : "bg-white text-gray-700 hover:bg-gray-100 border-gray-300"
             )}
           >
@@ -280,14 +280,14 @@ export default function FarmsPage() {
       {/* Farms Grid - Responsive layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredFarms.map((farm, index) => (
-          <motion.div 
+          <motion.div
             key={farm.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <Link 
-              href={`/farm/${farm.id}`} 
+            <Link
+              href={`/farm/${farm.id}`}
               className="block h-full"
               onClick={() => handleFarmClick(farm)}
             >
@@ -302,8 +302,8 @@ export default function FarmsPage() {
                   <div className="absolute top-4 left-4 flex gap-2">
                     <span className={cn(
                       "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium",
-                      farm.status === "Active" 
-                        ? "bg-green-100 text-green-800" 
+                      farm.status === "Active"
+                        ? "bg-green-100 text-green-800"
                         : "bg-gray-100 text-gray-800"
                     )}>
                       <span className={cn(
@@ -322,15 +322,15 @@ export default function FarmsPage() {
                 <CardContent className="pt-5 pb-2 bg-white">
                   <h3 className="text-xl font-semibold text-gray-900">{farm.name}</h3>
                   <div className="flex items-center mt-1">
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="16" 
-                      height="16" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                       className="text-gray-400 mr-1"
                     >
@@ -342,15 +342,15 @@ export default function FarmsPage() {
                 </CardContent>
                 <CardFooter className="pt-2 pb-5 bg-white flex justify-between items-center">
                   <div className="flex items-center">
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="16" 
-                      height="16" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                       className="text-gray-400 mr-1"
                     >
@@ -358,20 +358,20 @@ export default function FarmsPage() {
                     </svg>
                     <span className="text-sm text-gray-600">{farm.type} Setup</span>
                   </div>
-                  <motion.button 
+                  <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="bg-black text-white rounded-full p-1.5 flex items-center justify-center w-8 h-8 hover:bg-green-800 transition-colors shadow-sm"
                   >
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="14" 
-                      height="14" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path d="m9 18 6-6-6-6" />

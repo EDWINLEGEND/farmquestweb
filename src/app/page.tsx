@@ -232,7 +232,7 @@ export default function Home() {
                 </p>
 
                 <div className="flex items-center justify-center gap-5">
-                  <Link href="/get-started" className="bg-[#D2F04E] text-[#0F6435] px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 hover:bg-[#c2e03e] transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(210,240,78,0.3)]">
+                  <Link href="/register" className="bg-[#D2F04E] text-[#0F6435] px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 hover:bg-[#c2e03e] transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(210,240,78,0.3)]">
                     Start Farming <ArrowRight className="w-5 h-5" />
                   </Link>
 

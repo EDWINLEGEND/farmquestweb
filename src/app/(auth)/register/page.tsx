@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
-import ScaleSelection from '@/components/auth/ScaleSelection';
 
 export default function RegisterPage() {
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
-    const [step, setStep] = useState<'auth' | 'scale'>('auth');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -20,7 +20,9 @@ export default function RegisterPage() {
         e.preventDefault();
         // Handle signup logic
         console.log('Signup:', formData);
-        setStep('scale');
+
+        // Navigate to dashboard
+        router.push('/dashboard');
     };
 
     return (
@@ -74,84 +76,79 @@ export default function RegisterPage() {
                 {/* Left Side (Form) */}
                 <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-white">
                     <div className="max-w-md mx-auto w-full">
-                        {step === 'auth' ? (
-                            <>
-                                <div className="text-center mb-8">
-                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h2>
-                                    <p className="text-gray-500">Start managing your farm smarter today</p>
-                                </div>
+                        <div className="text-center mb-8">
+                            <h2 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h2>
+                            <p className="text-gray-500">Start managing your farm smarter today</p>
+                        </div>
 
-                                <form onSubmit={handleSubmit} className="space-y-5">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                                        <input
-                                            type="text"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#0F6435] focus:ring-2 focus:ring-[#0F6435]/20 outline-none transition-all placeholder:text-gray-400"
-                                            placeholder="John Doe"
-                                            required
-                                        />
-                                    </div>
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input
+                                    type="text"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#0F6435] focus:ring-2 focus:ring-[#0F6435]/20 outline-none transition-all placeholder:text-gray-400"
+                                    placeholder="John Doe"
+                                    required
+                                />
+                            </div>
 
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                                        <input
-                                            type="email"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#0F6435] focus:ring-2 focus:ring-[#0F6435]/20 outline-none transition-all placeholder:text-gray-400"
-                                            placeholder="you@example.com"
-                                            required
-                                        />
-                                    </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <input
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#0F6435] focus:ring-2 focus:ring-[#0F6435]/20 outline-none transition-all placeholder:text-gray-400"
+                                    placeholder="you@example.com"
+                                    required
+                                />
+                            </div>
 
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                                        <div className="relative">
-                                            <input
-                                                type={showPassword ? "text" : "password"}
-                                                value={formData.password}
-                                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#0F6435] focus:ring-2 focus:ring-[#0F6435]/20 outline-none transition-all placeholder:text-gray-400"
-                                                placeholder="Create a password"
-                                                required
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={() => setShowPassword(!showPassword)}
-                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                                            >
-                                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center gap-2">
-                                        <input type="checkbox" required className="w-4 h-4 rounded border-gray-300 text-[#0F6435] focus:ring-[#0F6435]" />
-                                        <span className="text-sm text-gray-600">
-                                            I agree to the <a href="#" className="text-[#0F6435] font-medium hover:underline">Terms of Service</a> and <a href="#" className="text-[#0F6435] font-medium hover:underline">Privacy Policy</a>
-                                        </span>
-                                    </div>
-
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                <div className="relative">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        value={formData.password}
+                                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#0F6435] focus:ring-2 focus:ring-[#0F6435]/20 outline-none transition-all placeholder:text-gray-400"
+                                        placeholder="Create a password"
+                                        required
+                                    />
                                     <button
-                                        type="submit"
-                                        className="w-full py-3.5 px-4 bg-[#0F6435] hover:bg-[#0A4523] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                                     >
-                                        Create Account
+                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                     </button>
-                                </form>
-
-                                <div className="mt-8 text-center text-sm text-gray-600">
-                                    Already have an account?{' '}
-                                    <Link href="/login" className="font-semibold text-[#0F6435] hover:underline">
-                                        Sign in
-                                    </Link>
                                 </div>
-                            </>
-                        ) : (
-                            <ScaleSelection />
-                        )}
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                <input type="checkbox" required className="w-4 h-4 rounded border-gray-300 text-[#0F6435] focus:ring-[#0F6435]" />
+                                <span className="text-sm text-gray-600">
+                                    I agree to the <a href="#" className="text-[#0F6435] font-medium hover:underline">Terms of Service</a> and <a href="#" className="text-[#0F6435] font-medium hover:underline">Privacy Policy</a>
+                                </span>
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="w-full py-3.5 px-4 bg-[#0F6435] hover:bg-[#0A4523] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                            >
+                                Create Account
+                            </button>
+                        </form>
+
+                        <div className="mt-8 text-center text-sm text-gray-600">
+                            Already have an account?{' '}
+                            <Link href="/login" className="font-semibold text-[#0F6435] hover:underline">
+                                Sign in
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
             </div>
