@@ -778,64 +778,36 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Floating Chat Button */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.3 }}
-          className="fixed bottom-8 right-8 z-50"
-        >
-          <button
-            className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
-            aria-label="Chat with us"
-          >
-            <MessageSquare className="h-6 w-6" />
-            <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-linear">
-              <span className="pl-2">Chat with us</span>
-            </span>
-          </button>
-        </motion.div>
-
-        {/* Scroll to top button */}
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 left-8 z-50 bg-white text-[#0F6435] p-3 rounded-full shadow-lg hover:shadow-xl hover:bg-[#77AD3F]/10 transition-all duration-300"
-          aria-label="Scroll to top"
-        >
-          <ChevronUp className="h-6 w-6" />
-        </motion.button>
-
-        {/* Cookie consent banner */}
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
-          className="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-[#77AD3F]/20 shadow-lg p-4"
-        >
-          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-4 md:mb-0 md:mr-4">
-              <p className="text-gray-700">
-                We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-              </p>
-            </div>
-            <div className="flex space-x-4">
-              <button className="text-gray-500 hover:text-gray-700 transition-colors">
-                Privacy Policy
-              </button>
-              <button className="bg-gradient-to-br from-[#77AD3F] to-[#0F6435] text-white px-4 py-2 rounded-md transition-colors">
-                Accept All
-              </button>
-            </div>
+          {/* Embedded Action Buttons - now part of footer layout */}
+          <div className="absolute bottom-8 right-8 z-50">
+            <button
+              className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+              aria-label="Chat with us"
+            >
+              <MessageSquare className="h-6 w-6" />
+              <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-linear">
+                <span className="pl-2">Chat with us</span>
+              </span>
+            </button>
           </div>
-        </motion.div>
+
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="absolute bottom-8 left-8 z-50 bg-white text-[#0F6435] p-3 rounded-full shadow-lg hover:shadow-xl hover:bg-[#77AD3F]/10 transition-all duration-300"
+            aria-label="Scroll to top"
+          >
+            <ChevronUp className="h-6 w-6" />
+          </button>
+        </div>
       </div>
 
 
-    </main>
+
+
+
+
+
+    </main >
   );
 }
