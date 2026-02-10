@@ -29,10 +29,10 @@ export default function TasksPage() {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
-    
+
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
@@ -75,7 +75,7 @@ export default function TasksPage() {
           {/* Status bar */}
           <div className="flex justify-between items-center px-6 py-3 border-b border-gray-100">
             <div className="text-gray-600 flex items-center">
-              <div 
+              <div
                 className="mr-2 cursor-pointer"
                 onClick={handleBackClick}
               >
@@ -100,27 +100,27 @@ export default function TasksPage() {
           <div className="relative flex flex-col items-center justify-center pt-8 pb-10 bg-gradient-to-b from-blue-50 to-white">
             <div className="relative mb-4">
               <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg">
-                <Image 
-                  src="/images/coin.png" 
-                  alt="Coin" 
-                  width={80} 
+                <Image
+                  src="/images/coin.png"
+                  alt="Coin"
+                  width={80}
                   height={80}
                   className="object-contain"
                   priority
                 />
               </div>
             </div>
-            
+
             <h1 className="text-5xl font-bold text-gray-800 animate-fadeIn">
               25,982
             </h1>
-            
+
             <div className="flex items-center mt-2 text-gray-600">
               <div className="flex items-center gap-1 bg-white/80 px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">
-                <Image 
-                  src="/images/coin.png" 
-                  alt="Coin" 
-                  width={16} 
+                <Image
+                  src="/images/coin.png"
+                  alt="Coin"
+                  width={16}
                   height={16}
                   className="object-contain"
                 />
@@ -150,7 +150,7 @@ export default function TasksPage() {
                           <div className="text-right">
                             <span className="font-semibold text-sm">{task.coins} Coins</span>
                           </div>
-                          <div 
+                          <div
                             className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center cursor-pointer`}
                             onClick={() => handleTaskClick(task.id)}
                           >
@@ -159,7 +159,7 @@ export default function TasksPage() {
                         </div>
                       </div>
                       {task.completed && (
-                        <div className="absolute bottom-6 right-6 transform translate-y-1/2 z-10">
+                        <div className="absolute bottom-14 right-6 transform translate-y-1/2 z-20">
                           <button className={`${style.completeBg} ${style.completeText} text-sm px-5 py-2 rounded-full flex items-center shadow-md`}>
                             <Check className="w-3 h-3 mr-1" />
                             Complete
@@ -185,7 +185,7 @@ export default function TasksPage() {
         <div className="container mx-auto py-8 px-4 max-w-7xl">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center">
-              <button 
+              <button
                 onClick={handleBackClick}
                 className="mr-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
               >
@@ -195,10 +195,10 @@ export default function TasksPage() {
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-lg">
-                <Image 
-                  src="/images/coin.png" 
-                  alt="Coin" 
-                  width={24} 
+                <Image
+                  src="/images/coin.png"
+                  alt="Coin"
+                  width={24}
                   height={24}
                   className="object-contain"
                 />
@@ -218,27 +218,27 @@ export default function TasksPage() {
                 <div className="flex flex-col items-center">
                   <div className="relative mb-6">
                     <div className="w-24 h-24 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-500 p-1">
-                      <Image 
-                        src="/images/coin.png" 
-                        alt="Coin" 
-                        width={96} 
+                      <Image
+                        src="/images/coin.png"
+                        alt="Coin"
+                        width={96}
                         height={96}
                         className="object-contain"
                         priority
                       />
                     </div>
                   </div>
-                  
+
                   <h2 className="text-6xl font-bold text-gray-800 mb-2">
                     25,982
                   </h2>
-                  
+
                   <div className="flex items-center mt-2 text-gray-600 text-lg">
                     <div className="flex items-center gap-2">
-                      <Image 
-                        src="/images/coin.png" 
-                        alt="Coin" 
-                        width={20} 
+                      <Image
+                        src="/images/coin.png"
+                        alt="Coin"
+                        width={20}
                         height={20}
                         className="object-contain"
                       />
@@ -294,13 +294,13 @@ export default function TasksPage() {
                     3 of 5 completed
                   </div>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-6">
                   {tasks.slice(0, 3).map((task, index) => {
                     const style = getCardStyles(index);
                     return (
                       <Card key={task.id} className="p-0 rounded-2xl overflow-hidden shadow-md border-0 transition-all hover:shadow-lg hover:translate-y-[-2px]">
-                        <div className={`${style.bg} ${style.text} p-5 pb-12 relative`}>
+                        <div className={`${style.bg} ${style.text} p-5 pb-20 relative`}>
                           <div className="flex justify-between items-start">
                             <div className="space-y-1">
                               <h3 className="font-medium text-lg">{task.title}</h3>
@@ -314,7 +314,7 @@ export default function TasksPage() {
                               <div className="text-right">
                                 <span className="font-semibold">{task.coins} Coins</span>
                               </div>
-                              <div 
+                              <div
                                 className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center group-hover:bg-opacity-90 transition-all cursor-pointer`}
                                 onClick={() => handleTaskClick(task.id)}
                               >
@@ -323,15 +323,15 @@ export default function TasksPage() {
                             </div>
                           </div>
                           {task.completed && (
-                            <div className="absolute bottom-0 right-16 transform translate-y-1/2 z-10">
-                              <div className={`${style.completeBg} ${style.completeText} px-4 py-1 rounded-full flex items-center shadow-md`}>
+                            <div className="absolute bottom-6 right-6 z-20">
+                              <div className={`${style.completeBg} ${style.completeText} px-4 py-2 rounded-full flex items-center shadow-md`}>
                                 <Check className="w-3 h-3 mr-1" />
                                 Complete
                               </div>
                             </div>
                           )}
                           {/* Bottom curve cutout - EXACT match to image */}
-                          <div className="absolute bottom-0 left-0 right-0 h-4 bg-white rounded-t-full"></div>
+                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-white rounded-t-[2rem]"></div>
                         </div>
                       </Card>
                     );
@@ -350,7 +350,7 @@ export default function TasksPage() {
                     View All
                   </button>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-6">
                   {tasks.slice(3, 5).map((task, index) => {
                     const style = getCardStyles(index + 3);
@@ -370,7 +370,7 @@ export default function TasksPage() {
                               <div className="text-right">
                                 <span className="font-semibold">{task.coins} Coins</span>
                               </div>
-                              <div 
+                              <div
                                 className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center group-hover:bg-opacity-90 transition-all cursor-pointer`}
                                 onClick={() => handleTaskClick(task.id)}
                               >
@@ -394,10 +394,10 @@ export default function TasksPage() {
                   {[1, 2, 3].map((item) => (
                     <div key={item} className="flex-shrink-0 w-64 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-100">
                       <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-3">
-                        <Image 
-                          src="/images/coin.png" 
-                          alt="Achievement" 
-                          width={32} 
+                        <Image
+                          src="/images/coin.png"
+                          alt="Achievement"
+                          width={32}
                           height={32}
                           className="object-contain"
                         />
