@@ -195,12 +195,20 @@ export default function Home() {
                 ))}
               </div>
 
-              <Link
-                href="/contact"
-                className="bg-white text-[#0F6435] px-6 py-2.5 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg active:scale-95 duration-200"
-              >
-                Contact Us
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/login"
+                  className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 text-white hover:bg-white/20"
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/contact"
+                  className="bg-white text-[#0F6435] px-6 py-2.5 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg active:scale-95 duration-200"
+                >
+                  Contact Us
+                </Link>
+              </div>
             </nav>
 
             {/* Hero Content */}
