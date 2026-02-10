@@ -685,49 +685,40 @@ function PlantCard({ plant, handlePlantClick }: { plant: PlantType; handlePlantC
         <Link
             href={`/plant/${plant.id}`}
             onClick={() => handlePlantClick(plant)}
-            className="relative pt-24 md:pt-0"
+            className="group relative block mt-12 md:mt-16"
         >
-            {/* Mobile: Image positioned outside card */}
-            <div className="md:hidden absolute scale-150 top-6 left-1/2 transform -translate-x-1/2 z-10">
-                <Image
-                    src={plant.image || plant.cropped_image_url || "/images/plant-1.png"}
-                    alt={plant.name}
-                    width={120}
-                    height={120}
-                    className="object-contain"
-                />
-            </div>
-
-            {/* Card content */}
-            <div className="bg-gray-100 rounded-3xl p-4 pt-28 md:p-6 relative z-0">
-                {/* Desktop: Image positioned inside card at the top */}
-                <div className="hidden md:block mb-4 ml-4">
+            <div className="relative">
+                {/* Image - Popping out */}
+                <div className="absolute -top-16 md:-top-24 left-1/2 -translate-x-1/2 z-10 w-32 h-32 md:w-48 md:h-48 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2">
                     <Image
                         src={plant.image || plant.cropped_image_url || "/images/plant-1.png"}
                         alt={plant.name}
-                        width={150}
-                        height={150}
-                        className="object-contain mx-auto"
+                        fill
+                        className="object-contain drop-shadow-xl"
                     />
                 </div>
 
-                <div className="mt-auto">
-                    <h3 className="text-xl font-bold">{plant.name}</h3>
-                    <p className="text-gray-500 text-sm mb-4">{plant.type}</p>
+                {/* Card Content */}
+                <div className="bg-[#F4F6F5] rounded-[2rem] p-4 pt-14 md:pt-20 pb-4 relative z-0 flex flex-col gap-2 border border-gray-100 transition-all duration-300 group-hover:bg-white group-hover:shadow-lg">
+                    <div className="text-center mt-1">
+                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1 leading-tight">{plant.name}</h3>
+                        <p className="text-gray-500 text-xs font-medium uppercase tracking-wide">{plant.type}</p>
+                    </div>
 
-                    <div className="flex justify-between items-center">
-                        <span className="font-bold">{plant.price ? `₹${plant.price}` : ""}</span>
-                        <div className="flex items-center">
+                    <div className="flex justify-between items-center w-full">
+                        <span className="text-xl font-bold text-gray-900">{plant.price ? `₹${plant.price}` : ""}</span>
+
+                        <div className="flex items-center gap-2">
                             {plant.rating && (
-                                <div className="flex items-center mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-500">
+                                <div className="flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-400">
                                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                     </svg>
-                                    <span className="text-sm ml-1">{plant.rating}</span>
+                                    <span className="text-xs font-bold text-gray-700">{plant.rating}</span>
                                 </div>
                             )}
-                            <button className="bg-green-600 text-white rounded-full p-1.5 flex items-center justify-center w-7 h-7 hover:bg-green-700 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <button className="w-10 h-10 rounded-full bg-[#0F6435] flex items-center justify-center text-white shadow-md hover:bg-[#0A4523] hover:scale-105 transition-all duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M5 12h14" />
                                     <path d="M12 5v14" />
                                 </svg>

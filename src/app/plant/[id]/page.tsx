@@ -46,17 +46,17 @@ export default function PlantDetailPage() {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   console.log(quantity);
-  
+
   const decreaseQuantity = () => {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
-  
+
   const increaseQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
 
-  console.log(decreaseQuantity,increaseQuantity );
-  
+  console.log(decreaseQuantity, increaseQuantity);
+
 
   useEffect(() => {
     const fetchPlantData = async () => {
@@ -235,11 +235,10 @@ export default function PlantDetailPage() {
                   className="flex items-center bg-gray-50 rounded-lg p-4 border border-gray-100"
                 >
                   <div
-                    className={`${
-                      index % 2 === 0
+                    className={`${index % 2 === 0
                         ? "bg-gradient-to-r from-[#77AD3F] to-[#0F6435]"
                         : "bg-yellow-400"
-                    } p-3 rounded-md mr-3`}
+                      } p-3 rounded-md mr-3`}
                   >
                     {index % 2 === 0 ? (
                       <svg
@@ -318,39 +317,57 @@ export default function PlantDetailPage() {
       {/* Related Plants Section */}
       <div>
         <h2 className="text-2xl font-bold mb-6">You Might Also Like</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
           {Array(4)
             .fill(0)
             .map((_, index) => (
               <Link
                 key={index}
                 href={`/plant/${index + 2}`}
-                className="bg-gray-50 rounded-xl p-4 transition-all hover:shadow-md"
+                className="group relative block mt-12"
               >
-                <div className="relative h-40 w-full mb-4">
-                  <Image
-                    src={`/images/plant-${(index % 5) + 1}.png`}
-                    alt="Related Plant"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <h3 className="font-semibold">Related Plant {index + 1}</h3>
-                <p className="text-sm text-gray-500 mb-2">Indoor</p>
-                <div className="flex justify-between items-center">
-                  <span className="font-bold">₹{199 + index * 50}</span>
-                  <div className="flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="text-yellow-500"
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                    <span className="text-sm ml-1">4</span>
+                <div className="relative">
+                  {/* Image - Popping out */}
+                  <div className="absolute -top-16 left-1/2 -translate-x-1/2 z-10 w-28 h-28 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2">
+                    <Image
+                      src={`/images/plant-${(index % 5) + 1}.png`}
+                      alt="Related Plant"
+                      fill
+                      className="object-contain drop-shadow-xl"
+                    />
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="bg-[#F4F6F5] rounded-[2rem] p-4 pt-14 pb-4 relative z-0 flex flex-col gap-2 border border-gray-100 transition-all duration-300 group-hover:bg-white group-hover:shadow-lg">
+                    <div className="text-center mt-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-0.5 leading-tight">
+                        Related Plant {index + 1}
+                      </h3>
+                      <p className="text-gray-500 text-xs font-medium uppercase tracking-wide">
+                        Indoor
+                      </p>
+                    </div>
+
+                    <div className="flex justify-between items-center w-full mt-1">
+                      <span className="text-lg font-bold text-gray-900">
+                        ₹{199 + index * 50}
+                      </span>
+
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-400">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                          </svg>
+                          <span className="text-xs font-bold text-gray-700">4</span>
+                        </div>
+                        <button className="w-8 h-8 rounded-full bg-[#0F6435] flex items-center justify-center text-white shadow-md hover:bg-[#0A4523] hover:scale-105 transition-all duration-300">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14" />
+                            <path d="M12 5v14" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Link>
