@@ -4,8 +4,8 @@ import Logo from '@/components/Logo';
 import HeroImage from '@/components/HeroImage';
 import GetStartedButton from '@/components/GetStartedButton';
 import AccountLink from '@/components/AccountLink';
-import { CheckCircle, Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award, Zap, ArrowRight, ChevronUp, MessageSquare, ArrowDown, Star, Play, Plus, Minus, Facebook, Instagram, Linkedin, Twitter, X } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { CheckCircle, Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award, Zap, ArrowRight, ChevronUp, MessageSquare, ArrowDown, Star, Play, Plus, Minus, Facebook, Instagram, Linkedin, Twitter, X, Bot } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -20,6 +20,78 @@ export default function Home() {
   const [isClient, setIsClient] = useState(false);
   const [activeSolution, setActiveSolution] = useState<number | null>(1);
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 20 : -20,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 20 : -20,
+      opacity: 0
+    })
+  };
+
+  const imageSlideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+    }),
+    center: {
+      x: 0,
+      zIndex: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? '100%' : '-100%',
+      zIndex: 0,
+    })
+  };
+
+  const testimonials = [
+    {
+      quote: "Real-time field data completely changed how we manage our crops. We're making smarter decisions and seeing healthier yields season after season.",
+      author: "Sarah Williams",
+      role: "CropSense, California",
+      image: "/images/background.png"
+    },
+    {
+      quote: "I've been farming for 40 years, and this is the first time I feel truly connected to every acre. The insights are simple to understand but powerful in practice.",
+      author: "Robert O'Neil",
+      role: "O'Neil Family Farms, Texas",
+      image: "/images/1.webp"
+    },
+    {
+      quote: "The carbon credit system turned our sustainable practices into a reliable income stream. It's rewarding to be recognized for caring for the land.",
+      author: "Elena Rodriguez",
+      role: "Green Valley Organics, Oregon",
+      image: "/images/background.png"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  const nextTestimonial = () => {
+    setDirection(1);
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setDirection(-1);
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   useEffect(() => {
     setIsClient(true);
@@ -653,29 +725,73 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Testimonials Section - NEW Design */}
+
+        {/* Testimonials Section - NEW Dynamic Design */}
         <div className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
               <div className="text-5xl text-[#0F6435] mb-6 font-serif">“</div>
-              <h2 className="text-3xl md:text-5xl font-medium text-[#1a1a1a] leading-tight mb-8">
-                Real-time field data completely changed how we manage our crops. We&apos;re making smarter decisions and seeing healthier yields season after season.
-              </h2>
-              <div>
-                <h4 className="font-bold text-lg text-[#1a1a1a]">Sarah Williams</h4>
-                <p className="text-gray-500">CropSense, California</p>
+
+              <div className="min-h-[220px] overflow-hidden relative">
+                <AnimatePresence mode="wait" custom={direction}>
+                  <motion.div
+                    key={currentTestimonial}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="absolute inset-0 flex flex-col justify-center"
+                  >
+                    <h2 className="text-3xl md:text-5xl font-medium text-[#1a1a1a] leading-tight mb-8 line-clamp-4">
+                      {testimonials[currentTestimonial].quote}
+                    </h2>
+                    <div>
+                      <h4 className="font-bold text-lg text-[#1a1a1a]">{testimonials[currentTestimonial].author}</h4>
+                      <p className="text-gray-500">{testimonials[currentTestimonial].role}</p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
+
               <div className="mt-8 flex gap-4">
-                <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+                <button
+                  onClick={prevTestimonial}
+                  className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+                >
                   <ArrowRight className="w-5 h-5 rotate-180" />
                 </button>
-                <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+                <button
+                  onClick={nextTestimonial}
+                  className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+                >
                   <ArrowRight className="w-5 h-5" />
                 </button>
               </div>
             </div>
+
             <div className="relative h-[600px] w-full bg-gray-100 rounded-[2rem] overflow-hidden">
-              <Image src="/images/background.png" alt="Testimonial" fill className="object-cover" />
+              {/* Updated Image AnimatePresence for full slide effect */}
+              <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                  key={currentTestimonial}
+                  custom={direction}
+                  variants={imageSlideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.2 } }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={testimonials[currentTestimonial].image}
+                    alt="Testimonial"
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -825,7 +941,7 @@ export default function Home() {
               className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
               aria-label="Chat with us"
             >
-              <MessageSquare className="h-6 w-6" />
+              <Bot className="h-6 w-6" />
               <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-linear">
                 <span className="pl-2">Chat with us</span>
               </span>
