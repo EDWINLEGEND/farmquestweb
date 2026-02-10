@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "@/lib/axios";
@@ -42,20 +42,34 @@ const dummyPlant: PlantType = {
 
 export default function PlantDetailPage() {
   const params = useParams();
+  const router = useRouter();  // Make sure useRouter is imported if not already, or added to imports
   const [plant, setPlant] = useState<PlantType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1);
-  console.log(quantity);
 
-  const decreaseQuantity = () => {
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  // New state for checkboxes and notification
+  const [addFertilizer, setAddFertilizer] = useState(false);
+  const [addToolkit, setAddToolkit] = useState(false);
+  const [notification, setNotification] = useState<string | null>(null);
+
+  const handleStartFarming = () => {
+    let message = "";
+    if (addFertilizer && addToolkit) {
+      message = "Fertilizer and Tool Kit will be delivered shortly.";
+    } else if (addFertilizer) {
+      message = "Fertilizer will be delivered shortly.";
+    } else if (addToolkit) {
+      message = "Tool Kit will be delivered shortly.";
+    } else {
+      message = "Happy farming!";
+    }
+
+    setNotification(message);
+
+    // Redirect after showing notification (allow some time for user to see it)
+    setTimeout(() => {
+      router.push("/growth-status");
+    }, 2500);
   };
-
-  const increaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
-  };
-
-  console.log(decreaseQuantity, increaseQuantity);
 
 
   useEffect(() => {
@@ -236,8 +250,8 @@ export default function PlantDetailPage() {
                 >
                   <div
                     className={`${index % 2 === 0
-                        ? "bg-gradient-to-r from-[#77AD3F] to-[#0F6435]"
-                        : "bg-yellow-400"
+                      ? "bg-gradient-to-r from-[#77AD3F] to-[#0F6435]"
+                      : "bg-yellow-400"
                       } p-3 rounded-md mr-3`}
                   >
                     {index % 2 === 0 ? (
@@ -292,12 +306,36 @@ export default function PlantDetailPage() {
               <p className="text-gray-600 text-sm">Price</p>
               <p className="text-3xl font-bold text-gray-800">₹{plant.price}</p>
             </div>
-            <Link
-              href="/growth-status"
-              className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-3 px-8 rounded-lg font-medium hover:shadow-md active:scale-[0.99] transition-all"
-            >
-              Start Farming
-            </Link>
+
+            <div className="flex flex-col items-end gap-3">
+              <div className="flex gap-4 text-sm text-gray-700">
+                <label className="flex items-center cursor-pointer hover:text-[#0F6435] transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={addFertilizer}
+                    onChange={(e) => setAddFertilizer(e.target.checked)}
+                    className="mr-2 w-4 h-4 accent-[#0F6435] rounded cursor-pointer"
+                  />
+                  Order Fertilizer
+                </label>
+                <label className="flex items-center cursor-pointer hover:text-[#0F6435] transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={addToolkit}
+                    onChange={(e) => setAddToolkit(e.target.checked)}
+                    className="mr-2 w-4 h-4 accent-[#0F6435] rounded cursor-pointer"
+                  />
+                  Order Tool Kit
+                </label>
+              </div>
+
+              <button
+                onClick={handleStartFarming}
+                className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-3 px-8 rounded-lg font-medium hover:shadow-md active:scale-[0.99] transition-all"
+              >
+                Start Farming
+              </button>
+            </div>
           </div>
 
           {/* Tags */}
@@ -374,6 +412,22 @@ export default function PlantDetailPage() {
             ))}
         </div>
       </div>
+      {/* Notification Toast */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 bg-white border-l-4 border-[#0F6435] shadow-xl rounded-lg p-4 animate-in slide-in-from-right-full duration-300 z-50 flex items-start max-w-sm">
+          <div className="bg-[#e6f4ea] p-2 rounded-full mr-3 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F6435" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900 border-b border-gray-100 pb-1 mb-1">Order Confirmed!</h4>
+            <p className="text-sm text-gray-600 font-medium">starting farming...</p>
+            <p className="text-xs text-gray-500 mt-1">{notification}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
