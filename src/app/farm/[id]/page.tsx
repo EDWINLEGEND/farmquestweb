@@ -10,7 +10,6 @@ import {
   ArrowLeft,
   Share2,
   MapPin,
-  Leaf,
   Newspaper,
   Calendar,
   Droplet,

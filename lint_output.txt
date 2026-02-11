@@ -1,0 +1,24 @@
+
+> web@0.1.0 lint
+> next lint
+
+
+./src/app/(auth)/login/page.tsx
+135:32  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./src/app/farm/[id]/page.tsx
+13:3  Error: 'Leaf' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/farms/page.tsx
+235:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+296:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/app/page.tsx
+7:10  Error: 'CheckCircle' is defined but never used.  @typescript-eslint/no-unused-vars
+7:82  Error: 'Zap' is defined but never used.  @typescript-eslint/no-unused-vars
+7:110  Error: 'MessageSquare' is defined but never used.  @typescript-eslint/no-unused-vars
+7:201  Error: 'X' is defined but never used.  @typescript-eslint/no-unused-vars
+14:7  Error: 'BackgroundGrid' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+20:10  Error: 'isClient' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules

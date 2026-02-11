@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -232,10 +234,11 @@ export default function FarmsPage() {
         </div>
         <div className="absolute right-0 top-0 h-full w-1/2 md:w-3/5">
           <div className="relative h-full w-full">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               alt="Kerala home farming"
-              className="object-cover rounded-r-2xl absolute inset-0 h-full w-full"
+              fill
+              className="object-cover rounded-r-2xl"
             />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent via-green-100/20 to-green-100"></div>
           </div>
@@ -293,10 +296,11 @@ export default function FarmsPage() {
             >
               <Card className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 border border-gray-100 rounded-xl">
                 <div className="relative h-60 w-full overflow-hidden">
-                  <img
+                  <Image
                     src={farm.image}
                     alt={farm.name}
-                    className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                   <div className="absolute top-4 left-4 flex gap-2">

@@ -4,20 +4,16 @@ import Logo from '@/components/Logo';
 import HeroImage from '@/components/HeroImage';
 import GetStartedButton from '@/components/GetStartedButton';
 import AccountLink from '@/components/AccountLink';
-import { CheckCircle, Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award, Zap, ArrowRight, ChevronUp, MessageSquare, ArrowDown, Star, Play, Plus, Minus, Facebook, Instagram, Linkedin, Twitter, X, Bot } from 'lucide-react';
+import { Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award, ArrowRight, ChevronUp, ArrowDown, Star, Play, Plus, Minus, Facebook, Instagram, Linkedin, Twitter, Bot } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import dynamic from 'next/dynamic';
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 // Import BackgroundGrid with SSR disabled
-const BackgroundGrid = dynamic(
-  () => import('@/components/ui/BackgroundGrid').then((mod) => mod.BackgroundGrid),
-  { ssr: false }
-);
+
 
 export default function Home() {
-  const [isClient, setIsClient] = useState(false);
   const [activeSolution, setActiveSolution] = useState<number | null>(1);
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -93,9 +89,7 @@ export default function Home() {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+
 
 
 
